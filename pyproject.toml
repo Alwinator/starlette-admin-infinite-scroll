@@ -1,0 +1,86 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "starlette-admin-infinite-scroll"
+description = "Infinite scrolling for the starlette-admin list view"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "Alwin J. Schuster", email = "contact@alwinschuster.at" }]
+keywords = ["starlette", "fastapi", "admin", "starlette-admin", "infinite-scroll", "plugin"]
+# Single source of truth: `__version__` in src/starlette_admin_infinite_scroll/__init__.py
+dynamic = ["version"]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: AsyncIO",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: JavaScript",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "starlette-admin >=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Alwinator/starlette-admin-infinite-scroll"
+Repository = "https://github.com/Alwinator/starlette-admin-infinite-scroll"
+Documentation = "https://github.com/Alwinator/starlette-admin-infinite-scroll/blob/main/docs/index.md"
+Issues = "https://github.com/Alwinator/starlette-admin-infinite-scroll/issues"
+Changelog = "https://github.com/Alwinator/starlette-admin-infinite-scroll/blob/main/CHANGELOG.md"
+
+[project.entry-points."starlette_admin.plugins"]
+infinite-scroll = "starlette_admin_infinite_scroll:InfiniteScrollPlugin"
+
+[project.optional-dependencies]
+i18n = ["babel>=2.17.0"]
+
+[tool.hatch.version]
+path = "src/starlette_admin_infinite_scroll/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/starlette_admin_infinite_scroll"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/",
+    "tests/",
+    "docs/",
+    "example/",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "httpx>=0.27",
+    "ruff>=0.8",
+    # starlette-admin's SQLAlchemy contrib targets 2.0.x.
+    "sqlalchemy[asyncio]>=2.0,<2.1",
+    "uvicorn[standard]>=0.30",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

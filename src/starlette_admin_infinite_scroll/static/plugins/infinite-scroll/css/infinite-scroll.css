@@ -1,0 +1,27 @@
+/* starlette-admin-infinite-scroll */
+
+.sa-infinite-scroll-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+}
+
+.sa-infinite-scroll-status:empty {
+  min-height: 0;
+  padding: 0;
+}
+
+.sa-infinite-scroll-sentinel {
+  height: 1px;
+  width: 100%;
+}
+
+/* Page links and "go to page" are meaningless once pages are appended; the
+   "Showing x to y of z" summary and the page size selector stay. */
+.sa-infinite-scroll--hide-pagination .card-footer .pagination,
+.sa-infinite-scroll--hide-pagination .card-footer form {
+  display: none !important;
+}
